@@ -8,12 +8,20 @@ using Orders.shared.Interface;
 
 namespace Orders.shared.Entities;
 
-public class Category : IEntityWithName
+public class State : IEntityWithName
 {
     public int Id { get; set; }
 
-    [Display(Name = "Categoria")]
+    [Display(Name = "Estado")]
     [MaxLength(100, ErrorMessage = "El campo {0} No puede tener mas de {1} caracteres")]
     [Required(ErrorMessage = "El campo {0} es obligatorio")]
     public string Name { get; set; } = null!;
+
+    public int CountryId { get; set; }
+
+    public Country? Country { get; set; }
+
+    public ICollection<City>? Cities { get; set; }
+
+    public int CititiesNumber => Cities == null ? 0 : Cities.Count;
 }
