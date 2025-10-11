@@ -1,0 +1,25 @@
+﻿@page "/countries"
+
+<h3>Paises</h3>
+
+@if (countries == null)
+{
+	<p>Cargando..</p>
+
+}
+else
+{
+	<table>
+		<tr>
+			<td>Pais</td>
+		</tr>
+		<tr>
+			@foreach(var country in countries)
+			{
+				<tr>
+					<td>@country.Name</td>
+				</tr>
+			}
+		</tr>		
+	</table>
+}
