@@ -29,6 +29,8 @@ public class SeedDb
             var statesSQLScript = File.ReadAllText("Data\\States.sql");
             var citiesSQLScript = File.ReadAllText("Data\\Cities.sql");
             await _context.Database.ExecuteSqlRawAsync(countriesSQLScript);
+            await _context.Database.ExecuteSqlRawAsync(statesSQLScript);
+            await _context.Database.ExecuteSqlRawAsync(citiesSQLScript);
         }
     }
 

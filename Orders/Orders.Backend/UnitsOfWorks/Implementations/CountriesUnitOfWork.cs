@@ -1,5 +1,6 @@
 ﻿using Orders.Backend.Repositories.Interfaces;
 using Orders.Backend.UnitsOfWorks.Interfaces;
+using Orders.shared.DTOs;
 using Orders.shared.Entities;
 using Orders.shared.Responses;
 
@@ -13,6 +14,9 @@ public class CountriesUnitOfWork : GenericUnitOfWork<Country>, ICountriesUnitOfW
     {
         _countriesRepository = countriesRepository;
     }
+
+    public override async Task<ActionResponse<IEnumerable<Country>>> GetAsync(PaginationDTO pagination) => await _countriesRepository.GetAsync(pagination)
+;
 
     public override async Task<ActionResponse<IEnumerable<Country>>> GetAsync() => await _countriesRepository.GetAsync();
 
