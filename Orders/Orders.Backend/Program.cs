@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Orders.Backend.Data;
 using Orders.Backend.Repositories.Implementations;
 using Orders.Backend.Repositories.Interfaces;
+using Orders.Backend.UnitsOfWork.Implementations;
+using Orders.Backend.UnitsOfWork.Interfaces;
 using Orders.Backend.UnitsOfWorks.Implementations;
 using Orders.Backend.UnitsOfWorks.Interfaces;
 
@@ -29,6 +31,8 @@ builder.Services.AddScoped<ICountriesUnitOfWork, CountriesUnitOfWork>();
 builder.Services.AddScoped<IStatesRepository, StatesRepository>();
 builder.Services.AddScoped<IStatesUnitOfWork, StatesUnitOfWork>();
 
+builder.Services.AddScoped<ICategoriesRepository, CategoriesRepository>();
+builder.Services.AddScoped<ICategoriesUnitOfWork, CategoriesUnitOfWork>();
 var app = builder.Build();
 
 SeedData(app);

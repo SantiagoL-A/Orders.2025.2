@@ -20,6 +20,11 @@ public class StatesRepository : GenericRepository<State>, IStatesRepository
     public override async Task<ActionResponse<IEnumerable<State>>> GetAsync(PaginationDTO pagination)
     {
         var queryable = _context.States.Include(x => x.Cities).Where(x => x.Country!.Id == pagination.Id).AsQueryable();
+        if (!string.IsNullOrWhiteSpace(pagination.Filter))
+        {
+            queryable = queryable.Where(x => x.Name.ToLower().Contains(pagination.Filter.ToLower()));
+        }
+
         return new ActionResponse<IEnumerable<State>>
         {
             WasSucces = true,
@@ -31,6 +36,11 @@ public class StatesRepository : GenericRepository<State>, IStatesRepository
     {
         Console.WriteLine($"Pagination.Id = {pagination.Id}");
         var queryable = _context.States.Where(x => x.Country!.Id == pagination.Id).AsQueryable();
+        if (!string.IsNullOrWhiteSpace(pagination.Filter))
+        {
+            queryable = queryable.Where(x => x.Name.ToLower().Contains(pagination.Filter.ToLower()));
+        }
+
         double count = await queryable.CountAsync();
         return new ActionResponse<int>
         {
